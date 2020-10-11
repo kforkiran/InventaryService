@@ -1,9 +1,7 @@
 package com.ecomm.inventary.model;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigInteger;
 
@@ -13,7 +11,11 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Product {
     private BigInteger id;
+    private String code;
     private String name;
+    private String description;
+    private BigInteger price;
 }

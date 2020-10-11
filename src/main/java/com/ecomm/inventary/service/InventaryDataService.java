@@ -5,6 +5,7 @@ import com.ecomm.inventary.repository.InventaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class InventaryDataService implements InventaryService {
@@ -17,11 +18,11 @@ public class InventaryDataService implements InventaryService {
 
     public Flux<ProductDto> getProductInventary() {
         return inventaryRepository.findAll()
-                .map(product -> inventaryAdapter.toProductDto(product));
-
+                                  .map(product -> inventaryAdapter.toProductDto(product));
     }
 
-    public void saveProduct(ProductDto productDto) {
-        inventaryRepository.save(inventaryAdapter.toProduct(productDto));
+    public Mono<ProductDto> saveProduct(ProductDto productDto) {
+        return inventaryRepository.save(inventaryAdapter.toProduct(productDto))
+                                  .map(product -> inventaryAdapter.toProductDto(product));
     }
 }

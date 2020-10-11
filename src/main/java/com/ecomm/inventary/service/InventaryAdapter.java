@@ -8,10 +8,22 @@ import org.springframework.stereotype.Component;
 public class InventaryAdapter {
 
     public ProductDto toProductDto(Product product) {
-        return new ProductDto(product.getId(), product.getName());
+        return ProductDto.builder()
+                .id(product.getId())
+                .code(product.getCode())
+                .name(product.getName())
+                .price(product.getPrice())
+                .description(product.getDescription())
+                .build();
     }
 
     public Product toProduct(ProductDto productDto) {
-        return new Product(productDto.getId(), productDto.getName());
+        return Product.builder()
+                .id(productDto.getId())
+                .code(productDto.getCode())
+                .name(productDto.getName())
+                .price(productDto.getPrice())
+                .description(productDto.getDescription())
+                .build();
     }
 }
